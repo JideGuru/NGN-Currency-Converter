@@ -3,6 +3,7 @@ package com.example.ngncurrencyconverter
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -36,9 +37,16 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     @SuppressLint("StringFormatInvalid")
     private fun convertAmount() {
         val stringInTextField = binding.enterAmount.text.toString()
+        val exchangeRate: Int
         if (stringInTextField.isNotEmpty()) {
+            exchangeRate = if(selectedOption == "USD") {
+                500
+            } else {
+                // Change it to the exchange rate
+                300
+            }
             val cost = stringInTextField.toDouble()
-            val total = cost/500
+            val total = cost/exchangeRate
             val formattedTotal = NumberFormat.getCurrencyInstance().format(total)
             binding.rate.text = getString(R.string.total, formattedTotal)
         }
