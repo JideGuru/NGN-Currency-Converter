@@ -28,7 +28,16 @@ class MainActivity : AppCompatActivity() {
         val formattedTotal = NumberFormat.getCurrencyInstance().format(total)
         binding.rate.text= getString(R.string.total, formattedTotal)
 
+        val spinner: Spinner = binding.currency
 
+        ArrayAdapter.createFromResource(
+                this,
+                R.array.currency_array,
+                android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = adapter
+        }
     }
 
 
